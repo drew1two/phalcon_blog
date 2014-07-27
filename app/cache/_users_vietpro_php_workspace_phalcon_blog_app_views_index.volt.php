@@ -4,9 +4,9 @@
   <head>
     <meta charset="utf-8">
     <title>Blog Tutorial</title>
-    {{ stylesheet_link('bootstrap/css/bootstrap.css') }}
-    {{ stylesheet_link('bootstrap/css/bootstrap-responsive.css') }}
-    {{ stylesheet_link('css/style.css') }}
+    <?php echo $this->tag->stylesheetLink('bootstrap/css/bootstrap.css'); ?>
+    <?php echo $this->tag->stylesheetLink('bootstrap/css/bootstrap-responsive.css'); ?>
+    <?php echo $this->tag->stylesheetLink('css/style.css'); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
@@ -51,9 +51,9 @@
           </div>
       </div>
     </div>
-    {{ content() }}
-    {{ javascript_include('js/jquery.min.js') }}
-    {{ javascript_include('bootstrap/js/bootstrap.js') }}
-    {{ javascript_include('js/utils.js') }}
+    <?php echo $this->getContent(); ?>
+    <?php echo $this->tag->javascriptInclude('js/jquery.min.js'); ?>
+    <?php echo $this->tag->javascriptInclude('bootstrap/js/bootstrap.js'); ?>
+    <?php echo $this->tag->javascriptInclude('js/utils.js'); ?>
   </body>
 </html>
