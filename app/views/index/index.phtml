@@ -1,0 +1,19 @@
+
+<?php use Phalcon\Tag as Tag; ?>
+
+<?php echo $this->getContent() ?>
+<div class="container">
+    <?php foreach($posts as $post){ ?>
+        <h4>
+            <?php echo $post->title ?>
+            <small>
+                created <?php echo $post->created ?> by <?php echo $post->getUsers()->username ?>
+            </small>
+        </h4>
+
+        <p style="margin: 0 20px">
+            <?php echo $post->content ?>
+        </p>
+        <br/>
+    <?php } ?>
+</div>

@@ -1,6 +1,8 @@
 <?php
+use \Phalcon\Tag as Tag,
+    \Phalcon\Mvc\Model\Criteria;
 
-class PostsController extends Phalcon\Mvc\Controller
+class PostsController extends ControllerBase
 {
 
     /**
@@ -12,7 +14,7 @@ class PostsController extends Phalcon\Mvc\Controller
     {
 
         //actions which we want to keep from outside access
-        $restricted = array('create', 'delete', 'update', 'new');
+        $restricted = array('create', 'delete', '', 'new');
 
         //auth token
         $auth = $this->session->get('auth');
@@ -46,21 +48,13 @@ class PostsController extends Phalcon\Mvc\Controller
      * like we do in this tutorial, $slug variable will be escaped so
      * we don’t have to deal with it.
      */
-    public function showAction($slug)
+    public function showAction($id)
     {
-        $post = Posts::findFirst(array(
-            'slug = :slug:',
-            'bind' => array(
-                'slug' => $slug
-            )
-        ));
+        $post = Posts::findFirst($id);
 
         if ($post === false) {
             $this->flash->error("Sorry, post not found");
-            $this->dispatcher->forward(array(
-                'controller' => 'posts',
-                'action' => 'index'
-            ));
+            return $this->response->redirect('posts/index');
         }
 
         $this->view->setVar('post', $post);
@@ -76,7 +70,7 @@ class PostsController extends Phalcon\Mvc\Controller
       $request = $this->request;
 
       if(!$request->isPost()) {
-        return $this->forward("posts/index");
+         return $this->response->redirect("posts/index");
       }
 
       $posts = new Posts();
@@ -85,7 +79,7 @@ class PostsController extends Phalcon\Mvc\Controller
       $posts->title = $request->getPost("title");
       $posts->slug = $request->getPost("slug");
       $posts->content = $request->getPost("content");
-        $posts->created = $request->getPost("created");
+      $posts->created = $request->getPost("created");
       $posts->users_id = $this->session->get('auth', $user->id);
 
       if(!$posts->save()) {
@@ -96,19 +90,89 @@ class PostsController extends Phalcon\Mvc\Controller
         return $this->forward("posts/new");
       } else {
         $this->flash->success("Post was created successflly");
-          return $this->dispatcher->forward(array(
-              "controller" => "posts",
-              "action" => "index"
-          ));
+        return $this->response->redirect("posts/index");
       }
     }
 
-    public function updateAction()
+    public function editAction($id)
     {
+        $request = $this->request;
+        if (!$request->isPost()) {
+
+            $id = $this->filter->sanitize($id, array("int"));
+
+            $posts = Posts::findFirst('id="' . $id . '"');
+            if (!$posts) {
+                $this->flash->error("The post was not found");
+                return $this->response->redirect("posts/index");
+            }
+            $this->view->setVar("id", $posts->id);
+
+            Tag::displayTo("id", $posts->id);
+            Tag::displayTo("categories_id", $posts->categories_id);
+            Tag::displayTo("title", $posts->title);
+            Tag::displayTo("slug", $posts->slug);
+            Tag::displayTo("content", $posts->content);
+
+            $this->view->setVar("categories", Categories::find());
+        }
     }
 
-    public function deleteAction($slug)
+    public function saveAction()
     {
+
+        if (!$this->request->isPost()) {
+            return $this->response->redirect("posts/index");
+        }
+
+        $id = $this->request->getPost("id");
+
+        $post = Posts::findFirstByid($id);
+        if (!$post) {
+            $this->flash->error("The post does not exist" . $id);
+            return $this->response->redirect("posts/index");
+        }
+
+        $request = $this->request;
+        $post->id = $request->getPost("id", "int");
+        $post->categories_id = $request->getPost("categories_id", "int");
+        $post->title = $request->getPost("title");
+        $post->slug = $request->getPost("slug");
+        $post->content = $request->getPost("content");
+        $post->created = $request->getPost("created");
+        $post->users_id = $this->session->get('auth', $user->id);
+
+        if (!$post->save()) {
+            foreach ($post->getMessages() as $message) {
+                $this->flash->error((string) $message);
+            }
+
+            return $this->response->redirect("posts/edit".$post->id);
+        } else {
+            $this->flash->success("Post was updated successfully");
+            return $this->response->redirect("posts/index");
+        }
+
+    }
+
+
+    public function deleteAction($id)
+    {
+        $posts = Posts::findFirst($id);
+        if (!$posts) {
+            $this->flash->error("The category was not found");
+            return $this->response->redirect("posts/index");
+        }
+
+        if (!$posts->delete()) {
+            foreach ($posts->getMessages() as $message){
+                $this->flash->error((string) $message);
+            }
+            return $this->response->redirect("posts/index");
+        } else {
+            $this->flash->success("The category was deleted");
+            return $this->response->redirect("posts/index");
+        }
     }
 
 }

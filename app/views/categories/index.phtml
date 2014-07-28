@@ -2,18 +2,25 @@
 <?php echo $this->getContent(); ?>
 
 <div align="right">
-    <?php echo \Phalcon\Tag::linkTo(array("categories/new", "Create Categories", "class" => "btn")) ?>
+    <?php echo \Phalcon\Tag::linkTo(array("categories/new", "Create Categories", "class" => "btn btn-primary")) ?>
 </div>
 
 <table class="table table-striped">
     <tr>
         <th>Title</th>
         <th>Slug</th>
+        <th>Action</th>
     </tr>
     <?php foreach($categories as $category){ ?>
         <tr>
             <td><?php echo $category->name ?></td>
-            <td><?php echo Tag::linkTo('categories/show/'.$post->slug, 'Details') ?></td>
+            <td><?php echo $category->slug ?></td>
+            <td><?php echo \Phalcon\Tag::linkTo(array("categories/edit/".$category->id, "Edit", "class" => "btn btn-warning")) ?> 
+                <?php echo \Phalcon\Tag::linkTo(array("categories/delete/".$category->id, "Delete", "class" => "btn btn-danger")) ?>
+            </td>
         </tr>
     <?php } ?>
+    <tr>
+
+    </tr>
 </table>

@@ -1,6 +1,6 @@
 <?php use Phalcon\Tag as Tag ?>
 
-<?php echo Tag::form(array("posts/create", "autocomplete" => "off")) ?>
+<?php echo Tag::form(array("posts/save", "autocomplete" => "off")) ?>
 
 <ul class="pager">
     <li class="previous pull-left">
@@ -11,7 +11,7 @@
 <?php echo $this->getContent() ?>
 
 <div class="center scaffold">
-    <h2>Create posts</h2>
+    <h2>Edit posts</h2>
     <hr>
     <div class="clearfix">
         <label for="categories_id">Categories</label>
@@ -30,9 +30,10 @@
 
     <div class="clearfix">
         <label for="content">Content</label>
-        <?php echo Tag::textArea(array("content", "size" => 40)) ?>
+        <?php echo Tag::textField(array("content", "size" => 40)) ?>
     </div>
     <div class="clearfix">
+        <?php echo $this->tag->hiddenField("id") ?>
         <?php echo Tag::submitButton(array("Save", "class" => "btn btn-success")) ?>
     </div>
 

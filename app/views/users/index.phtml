@@ -2,25 +2,27 @@
 
 <?php echo $this->getContent() ?>
 
-<div align="center">
+<div class="center scaffold">
 
     <h2>Log In</h2>
+    <hr>
 
     <?php echo Tag::form(array('users/login', 'class' => 'form-inline', 'autocomplete' => 'off')) ?>
 
-    <p>
-        <label class="control-label" for="login">Username/Email</label><br/>
-        <?php echo Tag::textField(array('login', 'size' => "30")) ?>
-    </p>
-
-    <p>
-        <label class="control-label" for="password">Password</label><br/>
+    <div class="clearfix">
+        <label for="username">Username:</label>
+        <?php echo Tag::textField(array('username', 'size' => "30")) ?>
+    </div>
+    <br/>
+    <div class="clearfix">
+        <label for="password">Password:</label>
         <?php echo Tag::passwordField(array('password', 'size' => "30")) ?>
-    </p>
-
-    <p>
-        <?php echo Tag::submitButton(array('Login', 'class' => 'btn btn-primary btn-medium')) ?>
-    </p>
-
+    </div>
+    <br/>
+    <div class="clearfix">
+        <?php echo Tag::submitButton(array('Login', 'class' => 'btn btn-primary btn-medium')) ?> or
+        <?php echo Tag::linkTo(array("users/new", "Member Registration")) ?>
+    </div>
+    <?php echo Tag::linkTo(array("users", "Lost password ?")) ?>
     </form>
 </div>

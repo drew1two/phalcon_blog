@@ -1,37 +1,32 @@
-<?php use Phalcon\Tag as Tag; ?>
+<?php use Phalcon\Tag as Tag ?>
 
-<?php echo $this->getContent(); ?>
+<?php echo Tag::form(array("categories/save", "autocomplete" => "off")) ?>
 
-<?php echo \Phalcon\Tag::form("categories/save") ?>
+<ul class="pager">
+    <li class="previous pull-left">
+        <?php echo Tag::linkTo(array("categories", "&larr; Go Back", "class" => "btn")) ?>
+    </li>
+</ul>
 
-<table width="100%">
-    <tr>
-        <td align="left"><?php echo Tag::linkTo(array("categories", "Back", "class" => "btn")) ?></td>
-        <td align="right"><?php echo Tag::submitButton(array("Save", "class" => "btn")) ?></td>
-    <tr>
-</table>
+<?php echo $this->getContent() ?>
 
-<div align="center">
-    <h1>Edit categories</h1>
+<div class="center scaffold">
+    <h2>Edit Category</h2>
+    <hr>
+    <div class="clearfix">
+        <label for="title">Name</label>
+        <?php echo Tag::textField(array("name", "size" => 40, "maxlength" => 100)) ?>
+    </div>
+
+    <div class="clearfix">
+        <label for="slug">Slug</label>
+        <?php echo Tag::textField(array("slug", "size" => 24, "maxlength" => 70)) ?>
+    </div>
+
+    <div class="clearfix">
+        <?php echo $this->tag->hiddenField("id") ?>
+        <?php echo Tag::submitButton(array("Save", "class" => "btn btn-success")) ?>
+    </div>
+
 </div>
-
-<table align="center">
-    <tr>
-        <td align="right">
-            <label for="name">Name</label>
-        </td>
-        <td align="left">
-            <?php echo Tag::textField(array("name", "size" => 30)) ?>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">
-            <label for="slug">Slug</label>
-        </td>
-        <td align="left">
-            <?php echo Tag::textField(array("slug", "size" => 30)) ?>
-        </td>
-    </tr>
-</table>
-
 </form>

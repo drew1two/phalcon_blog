@@ -6,15 +6,15 @@ class Users extends \Phalcon\Mvc\Model
     {
         $this->validate(new Email(
             array(
-                "field" => "login",
+                "field" => "email",
                 "message" => "the email is not valid"
             )
         ));
 
         $this->validate(new Uniqueness(
             array(
-                "field" => "login",
-                "message" => "The login must be unique"
+                "field" => "username",
+                "message" => "Username must be unique"
             )
         ));
 
@@ -30,13 +30,19 @@ class Users extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $login;
+    public $username;
+
+    public $email;
 
     /**
      *
      * @var string
      */
     public $password;
+
+    public $fullname;
+
+    public $profile;
 
     /**
      * Initialize method for model.

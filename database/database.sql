@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.10.1deb1
+-- version 4.1.9
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jul 28, 2014 at 02:44 PM
--- Server version: 5.6.19
--- PHP Version: 5.5.15RC1
+-- Host: localhost:8889
+-- Generation Time: Aug 24, 2014 at 06:25 PM
+-- Server version: 5.5.34
+-- PHP Version: 5.5.10
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -26,21 +26,20 @@ SET time_zone = "+00:00";
 -- Table structure for table `categories`
 --
 
-CREATE TABLE IF NOT EXISTS `categories` (
+CREATE TABLE `categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `slug` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(128) DEFAULT NULL,
+  `slug` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `slug`) VALUES
-(1, 'Food', 'About food '),
-(2, 'Ruby on Rails', 'About Ruby on Rails'),
-(3, 'Ruby on Rails ', 'All of things about Rails');
+(12, 'PHP5', 'This a feature of PHP'),
+(14, 'VTM ', 'sdsdsdsd');
 
 -- --------------------------------------------------------
 
@@ -48,26 +47,30 @@ INSERT INTO `categories` (`id`, `name`, `slug`) VALUES
 -- Table structure for table `posts`
 --
 
-CREATE TABLE IF NOT EXISTS `posts` (
+CREATE TABLE `posts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `slug` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `content` text COLLATE utf8_unicode_ci,
+  `title` varchar(128) DEFAULT NULL,
+  `slug` varchar(128) DEFAULT NULL,
+  `content` text,
   `created` datetime DEFAULT NULL,
   `users_id` int(10) unsigned NOT NULL,
   `categories_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_posts_users` (`users_id`),
   KEY `fk_posts_categories` (`categories_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `title`, `slug`, `content`, `created`, `users_id`, `categories_id`) VALUES
-(1, 'Sample', 'abc', 'sfsdlmfmlsmfmsmfmsmfmllm', '2014-07-28 00:00:00', 1, 2),
-(2, 'What''s Ruby on Rails ?', 'About Rails', 'Ruby on Rails is ......', '2014-07-28 14:11:09', 1, 3);
+(3, 'anh yeu em lam', 'anh yem em', 'sdsfdsffdf', NULL, 1, 14),
+(8, 'sfdsfdf', 'fdfdf', 'dfdfdfdf', NULL, 1, 12),
+(10, 'wdewew', 'ewew', 'wewe', NULL, 1, 12),
+(13, 'anh ', 'chang ', 'lam sao', NULL, 1, 12),
+(14, 'Phalcon', 'Framework', 'Wonderful', NULL, 1, 12),
+(15, 'asas', 'asasasasasa', '~ ã¯~ [ thÃ´ng tin truyá»n Ä‘áº¡t]\r\n~ N1 ã¯N2 ãŒ\r\nGiáº£i thÃ­ch:\r\nPhÃ¢n cÃ¡ch chá»§ ngá»¯ vÃ  vá»‹ ngá»¯ trong cÃ¢u. TrÃ´ng tin truyá»n Ä‘áº¡t thÆ°á»ng Ä‘á»©ng sau ã¯\r\nLÃ m chá»§ ngá»¯ cá»§a má»‡nh Ä‘á» chÃ­nh.\r\nVÃ­ dá»¥:\r\nç§ï¼ˆã‚ãŸã—ï¼‰ã¯æ—¥æœ¬ï¼ˆã«ã»ã‚“ï¼‰ã®æ–™ç†ï¼ˆã‚Šã‚‡ã†ã‚Šï¼‰ãŒå¥½ï¼ˆã™ï¼‰ãã§ã™ã€‚\r\nTÃ´i thÃ­ch mÃ³n Äƒn Nháº­t\r\nå±±ç”°ï¼ˆã‚„ã¾ã ï¼‰ã•ã‚“ã¯æ—¥æœ¬èªžï¼ˆã«ã»ã‚“ã”ï¼‰ãŒä¸Šæ‰‹ï¼ˆã˜ã‚‡ã†ãšï¼‰ã§ã™ã€‚\r\nAnh Yamada giá»i tiáº¿ng Nháº­t\r\nã“ã®å®¶ï¼ˆã„ãˆï¼‰ã¯ãƒ‰ã‚¤ãŒå¤§ï¼ˆãŠãŠï¼‰ãã„ã§ã™\r\nCÄƒn nhÃ  nÃ y cÃ³ cá»­a lá»›n\r\n\r\nChÃº Ã½:\r\nKhi há»i báº±ng ã¯ thÃ¬ cÅ©ng tráº£ lá»i báº±ng ã¯, vá»›i thÃ´ng tin tráº£ lá»i thay tháº¿ cho tá»« Ä‘á»ƒ há»i\r\nVÃ­ dá»¥:\r\nA: ã“ã‚Œã¯ä½•ã§ã™ã‹ï¼Ÿ\r\nB: ã“ã‚Œã¯ç§ã®çœ¼é¡(ã‚ãŒã­ï¼‰ã§ã™ã€‚\r\nA: CÃ¡i nÃ y lÃ  cÃ¡i gÃ¬?\r\nB: CÃ¡i nÃ y lÃ  máº¯t kÃ­nh cá»§a tÃ´i', NULL, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -75,30 +78,22 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `content`, `created`, `users_id`, `c
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `login` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `password` char(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` char(40) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `fullname` varchar(255) DEFAULT NULL,
+  `profile` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `password`) VALUES
-(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997');
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `posts`
---
-ALTER TABLE `posts`
-  ADD CONSTRAINT `fk_posts_categories` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_posts_users` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `fullname`, `profile`) VALUES
+(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', NULL, NULL, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
