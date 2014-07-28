@@ -8,6 +8,11 @@ class UsersController extends Phalcon\Mvc\Controller
 
     }
 
+    public function showAction()
+    {
+
+    }
+
     public function loginAction()
     {
 

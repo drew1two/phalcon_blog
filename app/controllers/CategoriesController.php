@@ -12,45 +12,6 @@ class CategoriesController extends ControllerBase
         $this->view->setVar('categories', Categories::find());
     }
 
-    public function searchAction()
-    {
-
-        $numberPage = 1;
-        if ($this->request->isPost()) {
-            $query = Criteria::fromInput($this->di, "Categories", $_POST);
-            $this->session->conditions = $query->getConditions();
-        } else {
-            $numberPage = $this->request->getQuery("page", "int");
-            if ($numberPage <= 0) {
-                $numberPage = 1;
-            }
-        }
-
-        $parameters = array();
-        if ($this->session->conditions) {
-            $parameters["conditions"] = $this->session->conditions;
-        }
-        $parameters["order"] = "id";
-
-        $categories = Categories::find($parameters);
-        if (count($categories) == 0) {
-            $this->flash->notice("The search did not find any categories");
-            return $this->dispatcher->forward(array(
-                "controller" => "categories",
-                "action" => "index"
-            ));
-        }
-
-        $paginator = new \Phalcon\Paginator\Adapter\Model(array(
-            "data" => $categories,
-            "limit"=> 10,
-            "page" => $numberPage
-        ));
-        $page = $paginator->getPaginate();
-
-        $this->view->setVar("page", $page);
-    }
-
     public function newAction()
     {
 

@@ -85,6 +85,8 @@ class PostsController extends Phalcon\Mvc\Controller
       $posts->title = $request->getPost("title");
       $posts->slug = $request->getPost("slug");
       $posts->content = $request->getPost("content");
+        $posts->created = $request->getPost("created");
+      $posts->users_id = $this->session->get('auth', $user->id);
 
       if(!$posts->save()) {
 
@@ -94,7 +96,10 @@ class PostsController extends Phalcon\Mvc\Controller
         return $this->forward("posts/new");
       } else {
         $this->flash->success("Post was created successflly");
-        return $this->forward("posts/index");
+          return $this->dispatcher->forward(array(
+              "controller" => "posts",
+              "action" => "index"
+          ));
       }
     }
 
