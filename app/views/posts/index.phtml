@@ -1,7 +1,9 @@
 <?php use Phalcon\Tag as Tag; ?>
 
 <?php echo $this->getContent() ?>
-
+<div align="right">
+    <?php echo \Phalcon\Tag::linkTo(array("posts/new", "Create Posts", "class" => "btn")) ?>
+</div>
 <p>
 <table class="table">
     <tr>

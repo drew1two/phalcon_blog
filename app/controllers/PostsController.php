@@ -66,9 +66,36 @@ class PostsController extends Phalcon\Mvc\Controller
         $this->view->setVar('post', $post);
     }
 
+    public function newAction()
+    {
+        $this->view->setVar("categories", Categories::find());
+    }
+
     public function createAction()
     {
+      $request = $this->request;
 
+      if(!$request->isPost()) {
+        return $this->forward("posts/index");
+      }
+
+      $posts = new Posts();
+      $posts->id = $request->getPost("id", "int");
+      $posts->categories_id = $request->getPost("categories_id", "int");
+      $posts->title = $request->getPost("title");
+      $posts->slug = $request->getPost("slug");
+      $posts->content = $request->getPost("content");
+
+      if(!$posts->save()) {
+
+        foreach ($posts->getMessages() as $message) {
+          $this->flash->error((string) $message);
+        }
+        return $this->forward("posts/new");
+      } else {
+        $this->flash->success("Post was created successflly");
+        return $this->forward("posts/index");
+      }
     }
 
     public function updateAction()

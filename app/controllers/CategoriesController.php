@@ -9,6 +9,7 @@ class CategoriesController extends ControllerBase
     public function indexAction()
     {
         $this->session->conditions = null;
+        $this->view->setVar('categories', Categories::find());
     }
 
     public function searchAction()
