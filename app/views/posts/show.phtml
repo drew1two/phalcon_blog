@@ -1,22 +1,16 @@
 <?php use Phalcon\Tag as Tag; ?>
 
-<ul class="pager">
-    <li class="previous pull-left">
-        <?php echo Tag::linkTo('posts/index', '← Go back ') ?>
-    </li>
-</ul>
-
-<div align="center">
+<div class="container">
 
     <h1>
         <?php echo $post->title ?>
         <small>
-            created <?php echo $post->created ?> by <?php echo $post->getUsers()->username ?>
+            created <?php echo $post->created ?> by <?php echo $post->getUsers()->username ?> | Category: <?php echo $post->categories->name ?>
         </small>
     </h1>
-
+    <br/>
     <p>
         <?php echo $post->content ?>
     </p>
-
+    <br/>
 </div>
