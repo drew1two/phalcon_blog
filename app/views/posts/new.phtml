@@ -30,11 +30,11 @@
 
     <div class="clearfix">
         <label for="content">Content</label>
-        <?php echo Tag::textArea(array("content", "size" => 40)) ?>
+        <?php echo Tag::textArea(array("content", "size" => 40, "class"=> "ckeditor")) ?>
+
     </div>
     <div class="clearfix">
         <?php echo Tag::submitButton(array("Save", "class" => "btn btn-success")) ?>
     </div>
-
 </div>
 </form>

@@ -30,8 +30,9 @@
 
     <div class="clearfix">
         <label for="content">Content</label>
-        <?php echo Tag::textField(array("content", "size" => 40)) ?>
+        <?php echo Tag::textArea(array("content", "class"=> "ckeditor")) ?>
     </div>
+    <br/>
     <div class="clearfix">
         <?php echo $this->tag->hiddenField("id") ?>
         <?php echo Tag::submitButton(array("Save", "class" => "btn btn-success")) ?>

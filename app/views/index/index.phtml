@@ -2,16 +2,26 @@
 <?php use Phalcon\Tag as Tag; ?>
 
 <?php echo $this->getContent() ?>
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand"><?php echo Phalcon\Tag::linkTo('index', 'Home Page') ?></li>
+            <li><a href="#">Another link</a></li>
+            <li><a href="#">Next link</a></li>
+            <li><a href="#">Last link</a></li>
+        </ul>
+    </div>
+</div>
 <div class="container">
     <?php foreach($posts as $post){ ?>
-        <h4>
+        <h1>
             <?php echo $post->title ?>
             <small>
                 created <?php echo $post->created ?> by <?php echo $post->getUsers()->username ?>
             </small>
-        </h4>
-
-        <p style="margin: 0 20px">
+        </h1>
+        <br/>
+        <p>
             <?php echo $post->content ?>
         </p>
         <br/>

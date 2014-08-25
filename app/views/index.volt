@@ -49,11 +49,16 @@
               <?php } ?>
             </ul>
           </div>
+        </div>
       </div>
     </div>
-    {{ content() }}
+
+    <div class="container">
+      {{ content() }}
+    </div>
     {{ javascript_include('js/jquery.min.js') }}
     {{ javascript_include('bootstrap/js/bootstrap.js') }}
     {{ javascript_include('js/utils.js') }}
+    {{ javascript_include('ckeditor/ckeditor.js') }}
   </body>
 </html>
