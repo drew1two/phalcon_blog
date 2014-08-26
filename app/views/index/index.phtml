@@ -18,10 +18,11 @@
     <?php foreach($posts as $post){ ?>
         <h1>
             <?php echo $post->title ?>
-            <small>
-                created <?php echo $post->created ?> by <?php echo $post->getUsers()->username ?> | Category: <?php echo $post->categories->name ?>
-            </small>
+
         </h1>
+        <small>
+            <em>created <?php echo $post->created ?> by <?php echo $post->getUsers()->email ?> | Category: <?php echo $post->categories->name ?></em>
+        </small>
         <br/>
         <p>
             <?php echo $post->content ?>

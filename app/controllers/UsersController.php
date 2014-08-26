@@ -31,10 +31,12 @@ class UsersController extends ControllerBase
         $user = new Users();
 
         $user->assign([
-                'username' => $this->request->getPost('username', 'striptags'),
-                'fullname' => $this->request->getPost('username', 'striptags'),
+                'first_name' => $this->request->getPost('first_name', 'striptags'),
+                'last_name' => $this->request->getPost('last_name', 'striptags'),
                 'email' => $this->request->getPost('email'),
-                'password' => $this->security->hash($this->request->getPost('password')),
+                'password' => sha1($this->request->getPost('password')),
+                'gender' => $this->request->getPost('gender'),
+                'profile' => $this->request->getPost('profile'),
             ]
         );
         if (!$user->save()) {
@@ -47,7 +49,7 @@ class UsersController extends ControllerBase
             ));
         } else {
             $this->flash->success("User was created successfully");
-            return $this->response->redirect('index');
+            return $this->response->redirect('users/index');
         }
     }
 
@@ -58,9 +60,9 @@ class UsersController extends ControllerBase
         if ($this->request->isPost()) {
 
             $user = Users::findFirst(array(
-                'username = :username: and password = :password:',
+                'email = :email: and password = :password:',
                 'bind' => array(
-                    'username' => $this->request->getPost("username"),
+                    'email' => $this->request->getPost("email"),
                     'password' => sha1($this->request->getPost("password"))
                 )
             ));

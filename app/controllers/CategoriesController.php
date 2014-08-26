@@ -32,7 +32,7 @@ class CategoriesController extends ControllerBase
 
             Tag::displayTo("id", $categories->id);
             Tag::displayTo("name", $categories->name);
-            Tag::displayTo("slug", $categories->slug);
+            Tag::displayTo("description", $categories->description);
         }
     }
 
@@ -46,7 +46,7 @@ class CategoriesController extends ControllerBase
         $categories = new Categories();
         $categories->id = $this->request->getPost("id");
         $categories->name = $this->request->getPost("name");
-        $categories->slug = $this->request->getPost("slug");
+        $categories->description = $this->request->getPost("description");
         if (!$categories->save()) {
             foreach ($categories->getMessages() as $message) {
                 $this->flash->error((string) $message);
@@ -79,7 +79,7 @@ class CategoriesController extends ControllerBase
 
         $category->id = $this->request->getPost("id");
         $category->name = $this->request->getPost("name");
-        $category->slug = $this->request->getPost("slug");
+        $category->description = $this->request->getPost("description");
 
         if (!$category->save()) {
             foreach ($category->getMessages() as $message) {

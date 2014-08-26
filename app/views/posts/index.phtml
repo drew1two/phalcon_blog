@@ -9,14 +9,14 @@
     <tr>
         <th>Title</th>
         <th>Category</th>
-        <th>Slug</th>
+        <th>description</th>
         <th>Action</th>
     </tr>
     <?php foreach($posts as $post){ ?>
         <tr>
             <td><?php echo $post->title ?></td>
             <td><?php echo $post->categories->name ?></td>
-            <td><?php echo $post->slug ?></td>
+            <td><?php echo $post->description ?></td>
             <td><?php echo Tag::linkTo(array('posts/show/'.$post->id, 'Details', "class" => "btn btn-info")) ?>
                 <?php echo \Phalcon\Tag::linkTo(array("posts/edit/".$post->id, "Edit", "class" => "btn btn-warning")) ?>
                 <?php echo \Phalcon\Tag::linkTo(array("posts/delete/".$post->id, "Delete", "class" => "btn btn-danger")) ?>

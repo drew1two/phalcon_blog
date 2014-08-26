@@ -19,7 +19,11 @@ class Categories extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $slug;
+    public $description;
+
+    public $created_at;
+
+    public $updated_at;
 
     /**
      * Initialize method for model.

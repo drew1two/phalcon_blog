@@ -45,7 +45,7 @@ class PostsController extends ControllerBase
 
     /**
      * Let’s read that record from the database. When using MySQL adapter,
-     * like we do in this tutorial, $slug variable will be escaped so
+     * like we do in this tutorial, $description variable will be escaped so
      * we don’t have to deal with it.
      */
     public function showAction($id)
@@ -77,9 +77,8 @@ class PostsController extends ControllerBase
       $posts->id = $request->getPost("id", "int");
       $posts->categories_id = $request->getPost("categories_id", "int");
       $posts->title = $request->getPost("title");
-      $posts->slug = $request->getPost("slug");
+      $posts->description = $request->getPost("description");
       $posts->content = $request->getPost("content");
-      $posts->created = $request->getPost("created");
       $posts->users_id = $this->session->get('auth', $user->id);
 
       if(!$posts->save()) {
@@ -111,7 +110,7 @@ class PostsController extends ControllerBase
             Tag::displayTo("id", $posts->id);
             Tag::displayTo("categories_id", $posts->categories_id);
             Tag::displayTo("title", $posts->title);
-            Tag::displayTo("slug", $posts->slug);
+            Tag::displayTo("description", $posts->description);
             Tag::displayTo("content", $posts->content);
 
             $this->view->setVar("categories", Categories::find());
@@ -137,9 +136,8 @@ class PostsController extends ControllerBase
         $post->id = $request->getPost("id", "int");
         $post->categories_id = $request->getPost("categories_id", "int");
         $post->title = $request->getPost("title");
-        $post->slug = $request->getPost("slug");
+        $post->description = $request->getPost("description");
         $post->content = $request->getPost("content");
-        $post->created = $request->getPost("created");
         $post->users_id = $this->session->get('auth', $user->id);
 
         if (!$post->save()) {

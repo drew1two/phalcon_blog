@@ -19,19 +19,13 @@ class Posts extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $slug;
+    public $description;
 
     /**
      *
      * @var string
      */
     public $content;
-
-    /**
-     *
-     * @var string
-     */
-    public $created;
 
     /**
      *
@@ -44,6 +38,10 @@ class Posts extends \Phalcon\Mvc\Model
      * @var integer
      */
     public $categories_id;
+
+    public $created_at;
+
+    public $updated_at;
 
     /**
      * Initialize method for model.
