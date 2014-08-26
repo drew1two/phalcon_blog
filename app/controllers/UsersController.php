@@ -23,21 +23,20 @@ class UsersController extends ControllerBase
 
     public function registerAction()
     {
+
         if (!$this->request->isPost()) {
             return $this->response->redirect('index');
         }
+
         $user = new Users();
 
-        $user->id = $this->request->getPost("id");
-        $user->username = $this->request->getPost('username');
-        $user->email = $this->request->getPost('email');
-        $user->password = $this->security->hash($this->request->getPost('password'));
-        $user->fullname = $this->request->getPost('fullname');
-        $user->profile = $this->request->getPost('profile');
-
-        //Store the password hashed
-//        $user->password = $this->security->hash($password);
-
+        $user->assign([
+                'username' => $this->request->getPost('username', 'striptags'),
+                'fullname' => $this->request->getPost('username', 'striptags'),
+                'email' => $this->request->getPost('email'),
+                'password' => $this->security->hash($this->request->getPost('password')),
+            ]
+        );
         if (!$user->save()) {
             foreach ($user->getMessages() as $message) {
                 $this->flash->error((string) $message);
@@ -51,6 +50,7 @@ class UsersController extends ControllerBase
             return $this->response->redirect('index');
         }
     }
+
 
     public function loginAction()
     {

@@ -18,6 +18,13 @@ class Users extends \Phalcon\Mvc\Model
             )
         ));
 
+        $this->validate(new Uniqueness(
+            array(
+                "field" => "email",
+                "message" => "the email is not valid"
+            )
+        ));
+
         return $this->validationHasFailed() !=true;
     }
     /**

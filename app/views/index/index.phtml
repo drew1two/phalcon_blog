@@ -6,9 +6,11 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand"><?php echo Phalcon\Tag::linkTo('index', 'Home Page') ?></li>
-            <li><a href="#">Another link</a></li>
-            <li><a href="#">Next link</a></li>
-            <li><a href="#">Last link</a></li>
+            <?php foreach($categories as $category){ ?>
+            <li>
+                <?php echo Tag::linkTo(array('', $category->name)) ?>
+            </li>
+            <?php } ?>
         </ul>
     </div>
 </div>
@@ -17,7 +19,7 @@
         <h1>
             <?php echo $post->title ?>
             <small>
-                created <?php echo $post->created ?> by <?php echo $post->getUsers()->username ?>
+                created <?php echo $post->created ?> by <?php echo $post->getUsers()->username ?> | Category: <?php echo $post->categories->name ?>
             </small>
         </h1>
         <br/>
