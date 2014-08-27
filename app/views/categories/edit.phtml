@@ -1,32 +1,44 @@
 <?php use Phalcon\Tag as Tag ?>
 
-<?php echo Tag::form(array("categories/save", "autocomplete" => "off")) ?>
-
 <ul class="pager">
     <li class="previous pull-left">
-        <?php echo Tag::linkTo(array("categories", "&larr; Go Back", "class" => "btn")) ?>
+        <?php echo Tag::linkTo(array("categories", "&larr; Go Back")) ?>
     </li>
 </ul>
 
 <?php echo $this->getContent() ?>
 
-<div class="center scaffold">
-    <h2>Edit Category</h2>
-    <hr>
-    <div class="clearfix">
-        <label for="title">Name</label>
-        <?php echo Tag::textField(array("name", "size" => 40, "maxlength" => 100)) ?>
-    </div>
+<div class="container">
+    <div class="well">
+        <?php echo Tag::form(array('categories/save', 'class' => 'form-horizontal', 'autocomplete' => 'off')) ?>
+            <legend>Edit Category</legend>
+            <div class="control-group">
+                <label class="control-label">Name</label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-pencil"></i></span>
+                        <?php echo Tag::textField(array('name','class' => 'input-xlarge', 'placeholder' => 'Name')) ?>
+                    </div>
+                </div>
+            </div>
 
-    <div class="clearfix">
-        <label for="description">Description</label>
-        <?php echo Tag::textField(array("description", "size" => 24, "maxlength" => 70)) ?>
-    </div>
+            <div class="control-group">
+                <label class="control-label">Description</label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-pencil"></i></span>
+                        <?php echo Tag::textField(array('description','class' => 'input-xlarge', 'placeholder' => 'Description')) ?>
+                    </div>
+                </div>
+            </div>
 
-    <div class="clearfix">
-        <?php echo $this->tag->hiddenField("id") ?>
-        <?php echo Tag::submitButton(array("Save", "class" => "btn btn-success")) ?>
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    <?php echo $this->tag->hiddenField("id") ?>
+                    <?php echo Tag::submitButton(array('Edit Category', 'class' => 'btn btn-success')) ?>
+                </div>
+            </div>
+        </form>
     </div>
-
 </div>
-</form>

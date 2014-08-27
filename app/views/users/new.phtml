@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="well">
-            <?php echo Tag::form(array('users/register', 'class' => 'form-horizontal', 'autocomplete' => 'off')) ?>
+        <?php echo Tag::form(array('users/register', 'class' => 'form-horizontal', 'autocomplete' => 'off')) ?>
             <legend>Sign Up</legend>
             <div class="control-group">
                 <label class="control-label">First Name</label>
@@ -38,12 +38,13 @@
                 <label class="control-label">Gender</label>
                 <div class="controls">
 
-                    <p><div id="gender" name="gender" class="btn-group" data-toggle="buttons-radio">
-                        <button type="button" class="btn btn-info">Male</button>
-                        <button type="button" class="btn btn-info">Female</button>
+                    <div id="gender"  class="btn-group" data-toggle="buttons-radio">
+                        <label for="rMale" class="btn btn-info active">Male</label>
+                        <label for="rFemale" class="btn btn-info">Female</label>
 
-                    </div></p>
-
+                        <input type="radio" name="gender" value="1" id="rMale" class="hidden" checked="checked" />
+                        <input type="radio" name="gender" value="0" id="rFemale" class="hidden"/>
+                    </div>
                 </div>
             </div>
             <div class="control-group">

@@ -14,7 +14,7 @@
     <?php foreach($categories as $category){ ?>
         <tr>
             <td><?php echo $category->name ?></td>
-            <td><?php echo $category->desciption ?></td>
+            <td><?php echo $category->description ?></td>
             <td><?php echo \Phalcon\Tag::linkTo(array("categories/edit/".$category->id, "Edit", "class" => "btn btn-warning")) ?> 
                 <?php echo \Phalcon\Tag::linkTo(array("categories/delete/".$category->id, "Delete", "class" => "btn btn-danger")) ?>
             </td>
